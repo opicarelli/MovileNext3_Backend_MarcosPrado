@@ -1,0 +1,34 @@
+/.settings
+/target
+.classpath
+.project
+
+# /parent/
+/parent/bin
+/parent/target
+/parent/.settings
+/parent/.project
+/parent/.classpath
+
+# /ejb/
+/ejb/bin
+/ejb/target
+/ejb/.settings
+/ejb/.project
+/ejb/.classpath
+
+# /war/
+/war/bin
+/war/target
+/war/.settings
+/war/.project
+/war/.classpath
+/war/.tern-project
+
+# /ear/
+/ear/bin
+/ear/target
+/ear/.settings
+/ear/.project
+/ear/.classpath
+/ear/.tern-project
