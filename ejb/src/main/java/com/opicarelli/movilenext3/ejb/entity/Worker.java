@@ -10,6 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
+import org.apache.commons.lang3.Validate;
+
 @Entity
 @Table(name = "T_WORKER", uniqueConstraints = { @UniqueConstraint(columnNames = "cpf", name = "worker_cpf_uk") })
 public class Worker implements Serializable {
@@ -23,4 +25,17 @@ public class Worker implements Serializable {
 	@Column(nullable = false)
 	private String cpf;
 
+	public Worker(String cpf) {
+		validateInvariants(cpf);
+
+		setCpf(cpf);
+	}
+
+	private void validateInvariants(String cpf) {
+		Validate.notNull(cpf, "CPF must be declared"); // TODO Validate CPF
+	}
+
+	private void setCpf(String cpf) {
+		this.cpf = cpf;
+	}
 }

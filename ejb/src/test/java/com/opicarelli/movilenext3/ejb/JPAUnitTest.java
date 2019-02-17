@@ -10,6 +10,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.opicarelli.movilenext3.ejb.entity.Product;
+import com.opicarelli.movilenext3.ejb.entity.Worker;
 import com.opicarelli.movilenext3.ejb.extension.entity.ProductCategoryTemperature;
 
 public class JPAUnitTest {
@@ -40,5 +41,13 @@ public class JPAUnitTest {
 		em.persist(product);
 		em.getTransaction().commit();
 		return product;
+	}
+	
+	public Worker createWorker(String cpf) {
+		Worker worker = new Worker(cpf);
+		em.getTransaction().begin();
+		em.persist(worker);
+		em.getTransaction().commit();
+		return worker;
 	}
 }
