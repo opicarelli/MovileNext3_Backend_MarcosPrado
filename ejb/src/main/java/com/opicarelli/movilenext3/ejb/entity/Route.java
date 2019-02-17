@@ -34,7 +34,7 @@ public class Route implements Serializable {
 	private Worker worker;
 
 	@OneToMany(mappedBy = "route", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	private List<Leg> legs = new ArrayList<>();
+	private List<Leg> legs = new LinkedList<>();
 
 	@Column(nullable = false)
 	@Enumerated(EnumType.STRING)
