@@ -16,6 +16,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import org.apache.commons.lang3.Validate;
+
 @Entity
 @Table(name = "T_ORDER")
 public class Order implements Serializable {
@@ -37,4 +39,39 @@ public class Order implements Serializable {
 	@OneToMany(mappedBy = "order", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private List<OrderItem> items = new ArrayList<>();
 
+	public Order(Locality origin, Locality destination, List<OrderItem> items) {
+		validateInvariants(origin, destination, items);
+
+		setOrigin(origin);
+		setDestination(destination);
+		setItems(items);
+	}
+
+	private void validateInvariants(Locality origin, Locality destination, List<OrderItem> items) {
+		Validate.notNull(origin, "Origin must be declared");
+		Validate.notNull(destination, "Destination must be declared");
+		Validate.notEmpty(items, "Items must be declared");
+		Validate.isTrue(items.size() >= 1, "Items must have at least one item");
+		Validate.isTrue(!origin.equals(destination), "Origin and Destination must not be equal");
+	}
+
+	private void setOrigin(Locality origin) {
+		this.origin = origin;
+	}
+
+	private void setDestination(Locality destination) {
+		this.destination = destination;
+	}
+
+	private void setItems(List<OrderItem> items) {
+		this.items = items;
+
+		for (OrderItem orderItem : items) {
+			orderItem.setOrder(this);
+		}
+	}
+
+	public Long getId() {
+		return id;
+	}
 }

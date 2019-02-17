@@ -11,6 +11,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.apache.commons.lang3.Validate;
+
 @Entity
 @Table(name = "T_ORDER_ITEM")
 public class OrderItem implements Serializable {
@@ -28,4 +30,22 @@ public class OrderItem implements Serializable {
 	@ManyToOne
 	@JoinColumn(nullable = false, foreignKey = @ForeignKey(name = "orderitem_order_fk"))
 	private Order order;
+
+	public OrderItem(Product product) {
+		validateInvariants(product);
+
+		setProduct(product);
+	}
+
+	private void validateInvariants(Product product) {
+		Validate.notNull(product, "Product must have be declared");
+	}
+
+	void setOrder(Order order) {
+		this.order = order;
+	}
+
+	private void setProduct(Product product) {
+		this.product = product;
+	}
 }

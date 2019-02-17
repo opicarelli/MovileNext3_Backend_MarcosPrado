@@ -11,6 +11,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.apache.commons.lang3.Validate;
+
 import com.opicarelli.movilenext3.ejb.extension.entity.ProductCategoryTemperature;
 
 @Entity
@@ -29,5 +31,25 @@ public class Product implements Serializable {
 	@Column(nullable = false)
 	@Enumerated(EnumType.STRING)
 	private ProductCategoryTemperature categoryTemperature;
+
+	public Product(String name, ProductCategoryTemperature categoryTemperature) {
+		validateInvariants(name, categoryTemperature);
+
+		setName(name);
+		setCategoryTemperature(categoryTemperature);
+	}
+
+	private void validateInvariants(String name, ProductCategoryTemperature categoryTemperature) {
+		Validate.notEmpty(name, "Name cannot be empty");
+		Validate.notNull(categoryTemperature, "CategoryTemperature must have be declared");
+	}
+
+	private void setName(String name) {
+		this.name = name;
+	}
+
+	private void setCategoryTemperature(ProductCategoryTemperature categoryTemperature) {
+		this.categoryTemperature = categoryTemperature;
+	}
 
 }
