@@ -26,11 +26,11 @@ public class Order implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@OneToOne
+	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(nullable = false, foreignKey = @ForeignKey(name = "order_origin_fk"))
 	private Locality origin;
 
-	@OneToOne
+	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(nullable = false, foreignKey = @ForeignKey(name = "order_destination_fk"))
 	private Locality destination;
 

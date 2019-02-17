@@ -22,6 +22,10 @@ public class OrderItem implements Serializable {
 	private Long id;
 
 	@ManyToOne
+	@JoinColumn(nullable = false, foreignKey = @ForeignKey(name = "orderitem_product_fk"))
+	private Product product;
+
+	@ManyToOne
 	@JoinColumn(nullable = false, foreignKey = @ForeignKey(name = "orderitem_order_fk"))
 	private Order order;
 }
