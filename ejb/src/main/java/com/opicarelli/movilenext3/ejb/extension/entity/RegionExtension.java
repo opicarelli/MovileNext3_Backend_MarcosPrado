@@ -21,7 +21,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.opicarelli.movilenext3.ejb.entity.Locality;
-import com.opicarelli.movilenext3.ejb.entity.Region;
+import com.opicarelli.movilenext3.ejb.marketplace.entity.Region;
 
 @Entity
 @Table(name = "T_REGION_EXTENSION")

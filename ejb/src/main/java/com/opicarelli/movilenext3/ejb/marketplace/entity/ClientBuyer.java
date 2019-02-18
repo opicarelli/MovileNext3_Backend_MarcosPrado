@@ -1,4 +1,4 @@
-package com.opicarelli.movilenext3.ejb.entity;
+package com.opicarelli.movilenext3.ejb.marketplace.entity;
 
 import java.io.Serializable;
 
@@ -13,9 +13,9 @@ import javax.persistence.UniqueConstraint;
 import org.apache.commons.lang3.Validate;
 
 @Entity
-@Table(name = "T_WORKER", uniqueConstraints = {
-		@UniqueConstraint(columnNames = "documentNumber", name = "worker_documentnumber_uk") })
-public class Worker implements Serializable {
+@Table(name = "T_CLIENTBUYER", uniqueConstraints = {
+		@UniqueConstraint(columnNames = "documentNumber", name = "clientbuyer_documentnumber_uk") })
+public class ClientBuyer implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
@@ -26,7 +26,7 @@ public class Worker implements Serializable {
 	@Column(nullable = false)
 	private String documentNumber;
 
-	public Worker(String documentNumber) {
+	public ClientBuyer(String documentNumber) {
 		validateInvariants(documentNumber);
 
 		setDocumentNumber(documentNumber);

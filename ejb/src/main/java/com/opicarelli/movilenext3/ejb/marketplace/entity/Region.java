@@ -1,4 +1,4 @@
-package com.opicarelli.movilenext3.ejb.entity;
+package com.opicarelli.movilenext3.ejb.marketplace.entity;
 
 import java.io.Serializable;
 

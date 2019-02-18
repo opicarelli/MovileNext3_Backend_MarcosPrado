@@ -14,7 +14,10 @@
 		<class>com.opicarelli.movilenext3.ejb.entity.Locality</class>
 		<class>com.opicarelli.movilenext3.ejb.entity.Route</class>
 		<class>com.opicarelli.movilenext3.ejb.entity.Worker</class>
-		<class>com.opicarelli.movilenext3.ejb.entity.Region</class>
+
+		<class>com.opicarelli.movilenext3.ejb.marketplace.entity.Region</class>
+		<class>com.opicarelli.movilenext3.ejb.marketplace.entity.Establishment</class>
+		<class>com.opicarelli.movilenext3.ejb.marketplace.entity.ClientBuyer</class>
 
 		<class>com.opicarelli.movilenext3.ejb.extension.entity.RegionExtension</class>
 
