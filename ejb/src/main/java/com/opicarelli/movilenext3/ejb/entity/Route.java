@@ -53,7 +53,8 @@ public class Route implements Serializable {
 		Validate.notNull(worker, "Worker must be declared");
 		Validate.notEmpty(legs, "Legs must be declared");
 		Validate.isTrue(legs.size() >= 1, "Legs must have at least one item");
-		Validate.isTrue(legs.getFirst().getStepOrder() == 1, "First legs must be the first step order");
+		Validate.isTrue(legs.getFirst().getStepOrder() == 1, "First leg must be the first step order");
+		Validate.isTrue(legs.getLast().getStepOrder() == legs.size(), "Last leg must have the same step order of the size list");
 	}
 
 	public Long getId() {

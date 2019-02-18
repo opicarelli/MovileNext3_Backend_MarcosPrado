@@ -4,6 +4,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
+import org.apache.log4j.Logger;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -15,6 +16,7 @@ import com.opicarelli.movilenext3.ejb.extension.entity.ProductCategoryTemperatur
 
 public class JPAUnitTest {
 
+	protected static Logger LOGGER = Logger.getLogger(JPAUnitTest.class);
 	protected static EntityManager em;
 	private static EntityManagerFactory emf;
 

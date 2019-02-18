@@ -31,7 +31,7 @@ public class OrderInvariantTest extends JPAUnitTest {
 
 			Assert.assertNotNull(em.find(Order.class, order.getId()));
 		} catch (Exception e) {
-			e.printStackTrace();
+			LOGGER.error("Fail", e);
 			if (em.getTransaction().isActive()) {
 				em.getTransaction().rollback();
 			}
@@ -57,11 +57,12 @@ public class OrderInvariantTest extends JPAUnitTest {
 			Assert.fail();
 		} catch (NullPointerException e) {
 			// SUCCESS
+			LOGGER.info(e.getMessage());
 			if (em.getTransaction().isActive()) {
 				em.getTransaction().rollback();
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			LOGGER.error("Fail", e);
 			if (em.getTransaction().isActive()) {
 				em.getTransaction().rollback();
 			}
@@ -87,11 +88,12 @@ public class OrderInvariantTest extends JPAUnitTest {
 			Assert.fail();
 		} catch (NullPointerException e) {
 			// SUCCESS
+			LOGGER.info(e.getMessage());
 			if (em.getTransaction().isActive()) {
 				em.getTransaction().rollback();
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			LOGGER.error("Fail", e);
 			if (em.getTransaction().isActive()) {
 				em.getTransaction().rollback();
 			}
@@ -117,11 +119,12 @@ public class OrderInvariantTest extends JPAUnitTest {
 			Assert.fail();
 		} catch (IllegalArgumentException e) {
 			// SUCCESS
+			LOGGER.info(e.getMessage());
 			if (em.getTransaction().isActive()) {
 				em.getTransaction().rollback();
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			LOGGER.error("Fail", e);
 			if (em.getTransaction().isActive()) {
 				em.getTransaction().rollback();
 			}
@@ -151,11 +154,12 @@ public class OrderInvariantTest extends JPAUnitTest {
 			Assert.fail();
 		} catch (IllegalArgumentException e) {
 			// SUCCESS
+			LOGGER.info(e.getMessage());
 			if (em.getTransaction().isActive()) {
 				em.getTransaction().rollback();
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			LOGGER.error("Fail", e);
 			if (em.getTransaction().isActive()) {
 				em.getTransaction().rollback();
 			}
