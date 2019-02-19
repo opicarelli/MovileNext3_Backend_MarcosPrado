@@ -31,7 +31,7 @@ cd wildfly-11.0.0.Final
 ### Start Jboss Wildfly
 ```console
 cd ~/wildfly-11.0.0.Final
-./bin/standalong.sh
+./bin/standalone.sh
 ```
 
 ### Config Jboss Wildfly
