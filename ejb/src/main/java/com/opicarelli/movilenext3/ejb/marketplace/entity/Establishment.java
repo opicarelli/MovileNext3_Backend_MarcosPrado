@@ -18,6 +18,7 @@ import javax.persistence.UniqueConstraint;
 import org.apache.commons.lang3.Validate;
 
 import com.opicarelli.movilenext3.ejb.entity.Locality;
+import com.opicarelli.movilenext3.ejb.geo.GeoUtils;
 
 @Entity
 @Table(name = "T_ESTABLISHMENT", uniqueConstraints = {
@@ -53,7 +54,8 @@ public class Establishment implements Serializable {
 		Validate.notNull(documentNumber, "Document number must be declared");
 		Validate.notNull(locality, "Locality must be declared");
 		Validate.notNull(region, "Region must be declared");
-		// TODO Validate if locality is inside region polygon
+		Validate.isTrue(GeoUtils.contains(region.getPolygon(), locality.getCoordinateX(), locality.getCoordinateY()),
+				"Locality is out side of region");
 	}
 
 	private void setDocumentNumber(String documentNumber) {
@@ -66,5 +68,9 @@ public class Establishment implements Serializable {
 
 	private void setRegion(Region region) {
 		this.region = region;
+	}
+
+	public Long getId() {
+		return id;
 	}
 }

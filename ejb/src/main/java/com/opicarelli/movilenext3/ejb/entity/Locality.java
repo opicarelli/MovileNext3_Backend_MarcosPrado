@@ -47,6 +47,14 @@ public class Locality implements Serializable {
 		this.coordinateY = coordinateY;
 	}
 
+	public Double getCoordinateX() {
+		return coordinateX;
+	}
+
+	public Double getCoordinateY() {
+		return coordinateY;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
