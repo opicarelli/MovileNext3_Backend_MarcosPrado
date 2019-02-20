@@ -54,6 +54,8 @@ public class Establishment implements Serializable {
 		Validate.notNull(documentNumber, "Document number must be declared");
 		Validate.notNull(locality, "Locality must be declared");
 		Validate.notNull(region, "Region must be declared");
+		
+		// This validation may be not performative... Another way could be validate in service or DTO from creation
 		Validate.isTrue(GeoUtils.contains(region.getPolygon(), locality.getCoordinateX(), locality.getCoordinateY()),
 				"Locality is out side of region");
 	}
