@@ -44,7 +44,7 @@ public class Region implements Serializable {
 		return id;
 	}
 
-	String getPolygon() {
+	public String getPolygon() {
 		return polygon;
 	}
 

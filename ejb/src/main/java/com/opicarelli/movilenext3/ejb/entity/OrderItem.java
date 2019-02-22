@@ -13,6 +13,8 @@ import javax.persistence.Table;
 
 import org.apache.commons.lang3.Validate;
 
+import com.opicarelli.movilenext3.ejb.marketplace.entity.Product;
+
 @Entity
 @Table(name = "T_ORDER_ITEM")
 public class OrderItem implements Serializable {

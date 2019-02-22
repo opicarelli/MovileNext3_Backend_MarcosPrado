@@ -10,6 +10,7 @@ alter table T_ORDER drop constraint order_destination_fk
 alter table T_ORDER drop constraint order_origin_fk
 alter table T_ORDER_ITEM drop constraint orderitem_order_fk
 alter table T_ORDER_ITEM drop constraint orderitem_product_fk
+alter table T_PRODUCT drop constraint product_establishment_fk
 alter table T_REGION_EXTENSION drop constraint regionextension_locality_fk
 alter table T_ROUTE drop constraint route_worker_fk
 drop table regionextension_regions if exists

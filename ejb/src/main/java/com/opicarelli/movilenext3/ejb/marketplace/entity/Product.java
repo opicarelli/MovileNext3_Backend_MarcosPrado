@@ -1,4 +1,4 @@
-package com.opicarelli.movilenext3.ejb.entity;
+package com.opicarelli.movilenext3.ejb.marketplace.entity;
 
 import java.io.Serializable;
 
@@ -6,9 +6,12 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.apache.commons.lang3.Validate;
@@ -32,16 +35,23 @@ public class Product implements Serializable {
 	@Enumerated(EnumType.STRING)
 	private ProductCategoryTemperature categoryTemperature;
 
-	public Product(String name, ProductCategoryTemperature categoryTemperature) {
-		validateInvariants(name, categoryTemperature);
+	@ManyToOne
+	@JoinColumn(nullable = false, foreignKey = @ForeignKey(name = "product_establishment_fk"))
+	private Establishment establishment;
+
+	public Product(String name, ProductCategoryTemperature categoryTemperature, Establishment establishment) {
+		validateInvariants(name, categoryTemperature, establishment);
 
 		setName(name);
 		setCategoryTemperature(categoryTemperature);
+		setEstablishment(establishment);
 	}
 
-	private void validateInvariants(String name, ProductCategoryTemperature categoryTemperature) {
+	private void validateInvariants(String name, ProductCategoryTemperature categoryTemperature,
+			Establishment establishment) {
 		Validate.notEmpty(name, "Name cannot be empty");
 		Validate.notNull(categoryTemperature, "CategoryTemperature must have be declared");
+		Validate.notNull(establishment, "Establishment must have be declared");
 	}
 
 	private void setName(String name) {
@@ -52,4 +62,7 @@ public class Product implements Serializable {
 		this.categoryTemperature = categoryTemperature;
 	}
 
+	private void setEstablishment(Establishment establishment) {
+		this.establishment = establishment;
+	}
 }

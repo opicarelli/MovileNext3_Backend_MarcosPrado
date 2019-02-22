@@ -7,7 +7,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import com.opicarelli.movilenext3.ejb.JPAUnitTest;
-import com.opicarelli.movilenext3.ejb.extension.entity.ProductCategoryTemperature;
+import com.opicarelli.movilenext3.ejb.marketplace.entity.Product;
 
 public class OrderInvariantTest extends JPAUnitTest {
 
@@ -16,7 +16,7 @@ public class OrderInvariantTest extends JPAUnitTest {
 
 		try {
 			// Setup
-			Product product = createProduct("açaí", ProductCategoryTemperature.FROZEN);
+			Product product = getSimpleProductAcai();
 
 			// Create Order
 			OrderItem item1 = new OrderItem(product);
@@ -138,7 +138,7 @@ public class OrderInvariantTest extends JPAUnitTest {
 
 		try {
 			// Setup
-			Product product = createProduct("açaí", ProductCategoryTemperature.FROZEN);
+			Product product = getSimpleProductAcai();
 
 			// Create Order
 			OrderItem item1 = new OrderItem(product);
@@ -167,4 +167,5 @@ public class OrderInvariantTest extends JPAUnitTest {
 		}
 
 	}
+
 }
