@@ -1,6 +1,6 @@
 package com.opicarelli.movilenext3.ejb.extension.entity;
 
-public enum ProductCategoryTemperature {
+public enum CategoryTemperature {
 
 	FROZEN(-18, -1),
 
@@ -13,7 +13,7 @@ public enum ProductCategoryTemperature {
 	private int min;
 	private int max;
 
-	private ProductCategoryTemperature(int min, int max) {
+	private CategoryTemperature(int min, int max) {
 		this.min = min;
 		this.max = max;
 	}

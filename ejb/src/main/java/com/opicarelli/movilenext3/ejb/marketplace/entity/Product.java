@@ -16,7 +16,7 @@ import javax.persistence.Table;
 
 import org.apache.commons.lang3.Validate;
 
-import com.opicarelli.movilenext3.ejb.extension.entity.ProductCategoryTemperature;
+import com.opicarelli.movilenext3.ejb.extension.entity.CategoryTemperature;
 
 @Entity
 @Table(name = "T_PRODUCT")
@@ -33,13 +33,13 @@ public class Product implements Serializable {
 
 	@Column(nullable = false)
 	@Enumerated(EnumType.STRING)
-	private ProductCategoryTemperature categoryTemperature;
+	private CategoryTemperature categoryTemperature;
 
 	@ManyToOne
 	@JoinColumn(nullable = false, foreignKey = @ForeignKey(name = "product_establishment_fk"))
 	private Establishment establishment;
 
-	public Product(String name, ProductCategoryTemperature categoryTemperature, Establishment establishment) {
+	public Product(String name, CategoryTemperature categoryTemperature, Establishment establishment) {
 		validateInvariants(name, categoryTemperature, establishment);
 
 		setName(name);
@@ -47,7 +47,7 @@ public class Product implements Serializable {
 		setEstablishment(establishment);
 	}
 
-	private void validateInvariants(String name, ProductCategoryTemperature categoryTemperature,
+	private void validateInvariants(String name, CategoryTemperature categoryTemperature,
 			Establishment establishment) {
 		Validate.notEmpty(name, "Name cannot be empty");
 		Validate.notNull(categoryTemperature, "CategoryTemperature must have be declared");
@@ -58,11 +58,15 @@ public class Product implements Serializable {
 		this.name = name;
 	}
 
-	private void setCategoryTemperature(ProductCategoryTemperature categoryTemperature) {
+	private void setCategoryTemperature(CategoryTemperature categoryTemperature) {
 		this.categoryTemperature = categoryTemperature;
 	}
 
 	private void setEstablishment(Establishment establishment) {
 		this.establishment = establishment;
+	}
+
+	public CategoryTemperature getCategoryTemperature() {
+		return categoryTemperature;
 	}
 }

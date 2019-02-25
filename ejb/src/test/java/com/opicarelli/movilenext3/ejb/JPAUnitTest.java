@@ -12,7 +12,7 @@ import org.junit.Test;
 
 import com.opicarelli.movilenext3.ejb.entity.Locality;
 import com.opicarelli.movilenext3.ejb.entity.Worker;
-import com.opicarelli.movilenext3.ejb.extension.entity.ProductCategoryTemperature;
+import com.opicarelli.movilenext3.ejb.extension.entity.CategoryTemperature;
 import com.opicarelli.movilenext3.ejb.marketplace.entity.Establishment;
 import com.opicarelli.movilenext3.ejb.marketplace.entity.Product;
 import com.opicarelli.movilenext3.ejb.marketplace.entity.Region;
@@ -45,7 +45,7 @@ public class JPAUnitTest {
 		Region region1 = createRegion(polygonWkt1);
 		Locality locality = new Locality(-47.08226961230012, -22.825819322651185);
 		Establishment establishment = createEstablishment("84.348.151/0001-25", locality, region1);
-		Product product = createProduct("açaí", ProductCategoryTemperature.FROZEN, establishment);
+		Product product = createProduct("açaí", CategoryTemperature.FROZEN, establishment);
 		return product;
 	}
 
@@ -57,7 +57,7 @@ public class JPAUnitTest {
 		return establishment;
 	}
 
-	protected Product createProduct(String name, ProductCategoryTemperature categoryTemperature,
+	protected Product createProduct(String name, CategoryTemperature categoryTemperature,
 			Establishment establishment) {
 		Product product = new Product("açaí", categoryTemperature, establishment);
 		em.getTransaction().begin();

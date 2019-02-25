@@ -14,9 +14,11 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
+import com.opicarelli.movilenext3.ejb.extension.RegionExtensionRestriction;
 import com.opicarelli.movilenext3.ejb.extension.entity.RegionExtension;
 import com.opicarelli.movilenext3.ejb.geo.service.GeoService;
 import com.opicarelli.movilenext3.ejb.marketplace.entity.Establishment;
+import com.opicarelli.movilenext3.ejb.marketplace.entity.Product;
 import com.opicarelli.movilenext3.ejb.marketplace.entity.Region;
 
 @Stateless
@@ -76,4 +78,5 @@ public class MarketPlaceServiceImpl implements MarketPlaceService {
 		// TODO Create system param
 		return true;
 	}
+
 }

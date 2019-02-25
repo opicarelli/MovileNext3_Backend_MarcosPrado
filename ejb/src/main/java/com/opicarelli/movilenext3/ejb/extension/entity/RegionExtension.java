@@ -1,6 +1,7 @@
 package com.opicarelli.movilenext3.ejb.extension.entity;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -22,8 +23,13 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.opicarelli.movilenext3.ejb.entity.Locality;
+import com.opicarelli.movilenext3.ejb.marketplace.entity.Product;
 import com.opicarelli.movilenext3.ejb.marketplace.entity.Region;
 
+/**
+ * This class represents a container where the workers will make the product
+ * exchange (with or without pause).
+ */
 @Entity
 @Table(name = "T_REGION_EXTENSION")
 public class RegionExtension implements Serializable {
@@ -39,19 +45,28 @@ public class RegionExtension implements Serializable {
 	private Locality locality;
 
 	@OneToMany
-	@JoinTable(name = "regionextension_regions", joinColumns = @JoinColumn(name = "regionextension_id"), inverseJoinColumns = @JoinColumn(name = "region_id", referencedColumnName = "id"), foreignKey = @ForeignKey(name = "regionextension_regions_regionextension_fk"), inverseForeignKey = @ForeignKey(name = "regionextension_regions_region_fk"))
+	@JoinTable(name = "regionextension_regions",
+		joinColumns = @JoinColumn(name = "regionextension_id"), foreignKey = @ForeignKey(name = "regionextension_regions_regionextension_fk"),
+		inverseJoinColumns = @JoinColumn(name = "region_id", referencedColumnName = "id"), inverseForeignKey = @ForeignKey(name = "regionextension_regions_region_fk"))
 	private List<Region> regions;
 
 	@ElementCollection(fetch = FetchType.EAGER)
-	@CollectionTable(name = "regionextension_supports", joinColumns = @JoinColumn(name = "regionextension_id", referencedColumnName = "id"), foreignKey = @ForeignKey(name = "regionextension_supports_regionextension_fk"))
+	@CollectionTable(name = "regionextension_supports",
+		joinColumns = @JoinColumn(name = "regionextension_id", referencedColumnName = "id"), foreignKey = @ForeignKey(name = "regionextension_supports_regionextension_fk"))
 	@Column(name = "support")
 	@Enumerated(EnumType.STRING)
-	private List<ProductCategoryTemperature> supportsProductCategoryTemperature;
+	private List<CategoryTemperature> supportsCategoryTemperature;
 
-	public RegionExtension(Locality locality, List<Region> regions, List<ProductCategoryTemperature> supports) {
+	@OneToMany
+	@JoinTable(name = "regionextension_actual_products",
+		joinColumns = @JoinColumn(name = "regionextension_id"), foreignKey = @ForeignKey(name = "regionextension_actual_products_regionextension_fk"),
+		inverseJoinColumns = @JoinColumn(name = "product_id", referencedColumnName = "id"), inverseForeignKey = @ForeignKey(name = "regionextension_actual_products_product_fk"))
+	private List<Product> actualProducts = new ArrayList<>();
+
+	public RegionExtension(Locality locality, List<Region> regions, List<CategoryTemperature> supports) {
 		this.locality = locality;
 		this.regions = regions;
-		this.supportsProductCategoryTemperature = supports;
+		this.supportsCategoryTemperature = supports;
 	}
 
 	public Long getId() {
@@ -60,5 +75,9 @@ public class RegionExtension implements Serializable {
 
 	public List<Region> getRegions() {
 		return regions;
+	}
+
+	public List<CategoryTemperature> getSupportsCategoryTemperature() {
+		return supportsCategoryTemperature;
 	}
 }

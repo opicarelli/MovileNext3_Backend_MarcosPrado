@@ -6,7 +6,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import com.opicarelli.movilenext3.ejb.JPAUnitTest;
-import com.opicarelli.movilenext3.ejb.extension.entity.ProductCategoryTemperature;
+import com.opicarelli.movilenext3.ejb.extension.entity.CategoryTemperature;
 import com.opicarelli.movilenext3.ejb.extension.entity.RegionExtension;
 import com.opicarelli.movilenext3.ejb.marketplace.entity.Establishment;
 import com.opicarelli.movilenext3.ejb.marketplace.entity.Region;
@@ -110,7 +110,7 @@ public class MarketplaceInvariantTest extends JPAUnitTest {
 			// Create RegionExtension FROZEN
 			Locality locality = new Locality(-47.093354200325074, -22.826387270684734);
 			RegionExtension regionExtension = new RegionExtension(locality, Arrays.asList(region1, region2),
-					Arrays.asList(ProductCategoryTemperature.FROZEN));
+					Arrays.asList(CategoryTemperature.FROZEN));
 
 			// Test JPA
 			em.getTransaction().begin();
