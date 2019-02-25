@@ -84,6 +84,14 @@ public class Establishment implements Serializable {
 		return id;
 	}
 
+	public Region getRegion() {
+		return region;
+	}
+
+	public List<Product> getProducts() {
+		return products;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;

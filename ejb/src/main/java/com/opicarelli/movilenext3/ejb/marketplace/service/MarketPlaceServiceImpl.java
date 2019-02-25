@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import javax.ejb.EJB;
@@ -14,7 +15,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
-import com.opicarelli.movilenext3.ejb.extension.RegionExtensionRestriction;
+import com.opicarelli.movilenext3.ejb.extension.RegionExtensionRestriction.StandardRegionExtensionRestriction;
 import com.opicarelli.movilenext3.ejb.extension.entity.RegionExtension;
 import com.opicarelli.movilenext3.ejb.geo.service.GeoService;
 import com.opicarelli.movilenext3.ejb.marketplace.entity.Establishment;
@@ -31,8 +32,14 @@ public class MarketPlaceServiceImpl implements MarketPlaceService {
 	private GeoService geoService;
 
 	@Override
+	public boolean isFlagRegionExtensionEnabled() {
+		// TODO Create system param
+		return true;
+	}
+
+	@Override
 	public List<Establishment> findAllEstablishment(Double coordinateX, Double coordinateY) {
-		List<Establishment> result = new ArrayList<Establishment>();
+		List<Establishment> result = new ArrayList<>();
 		Region region = geoService.findRegion(coordinateX, coordinateY);
 		if (region != null) {
 			List<Region> regions = new ArrayList<>();
@@ -74,9 +81,55 @@ public class MarketPlaceServiceImpl implements MarketPlaceService {
 	}
 
 	@Override
-	public boolean isFlagRegionExtensionEnabled() {
-		// TODO Create system param
-		return true;
+	public List<Product> findAllProduct(Double coordinateX, Double coordinateY) {
+		List<Product> result = new ArrayList<>();
+
+		// Get Region
+		Region region = geoService.findRegion(coordinateX, coordinateY);
+		if (region != null) {
+
+			List<RegionExtension> extensions = new ArrayList<>();
+			List<Region> regions = new ArrayList<>();
+
+			// Get extensions
+			if (this.isFlagRegionExtensionEnabled()) {
+				extensions = this.findAllRegionExtension(region);
+				regions = extensions.stream().flatMap(item -> item.getRegions().stream()).collect(Collectors.toList());
+			}
+			if (regions.isEmpty()) {
+				regions = Arrays.asList(region);
+			}
+
+			// Get establishments
+			List<Establishment> establishments = this.findAllEstablishment(regions);
+
+			// Get products
+			for (Establishment establishment : establishments) {
+
+				// All
+				if (establishment.getRegion().equals(region)) {
+					result.addAll(establishment.getProducts());
+
+				} else {
+
+					// By Extension restrictions
+					Optional<RegionExtension> extension = extensions.stream()
+							.filter(item -> item.getRegions().contains(establishment.getRegion())).findFirst();
+					if (extension.isPresent()) {
+						StandardRegionExtensionRestriction restriction = StandardRegionExtensionRestriction.PRODUCT_TEMPERATURE;
+						for (Product product : establishment.getProducts()) {
+							boolean isFeasible = restriction.isFeasible(extension.get(), product); // TODO List of restrictions
+							if (isFeasible) {
+								result.add(product);
+							}
+						}
+					}
+
+				}
+
+			}
+		}
+		return result;
 	}
 
 }
