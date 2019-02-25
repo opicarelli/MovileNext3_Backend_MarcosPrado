@@ -1,3 +1,5 @@
+alter table regionextension_actual_products drop constraint regionextension_actual_products_product_fk
+alter table regionextension_actual_products drop constraint regionextension_actual_products_regionextension_fk
 alter table regionextension_regions drop constraint regionextension_regions_region_fk
 alter table regionextension_regions drop constraint regionextension_regions_regionextension_fk
 alter table regionextension_supports drop constraint regionextension_supports_regionextension_fk
@@ -13,6 +15,7 @@ alter table T_ORDER_ITEM drop constraint orderitem_product_fk
 alter table T_PRODUCT drop constraint product_establishment_fk
 alter table T_REGION_EXTENSION drop constraint regionextension_locality_fk
 alter table T_ROUTE drop constraint route_worker_fk
+drop table regionextension_actual_products if exists
 drop table regionextension_regions if exists
 drop table regionextension_supports if exists
 drop table T_CLIENTBUYER if exists
