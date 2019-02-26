@@ -45,20 +45,20 @@ public class RegionExtension implements Serializable {
 	private Locality locality;
 
 	@OneToMany
-	@JoinTable(name = "regionextension_regions",
+	@JoinTable(name = "T_REGION_EXTENSION_REGIONS",
 		joinColumns = @JoinColumn(name = "regionextension_id"), foreignKey = @ForeignKey(name = "regionextension_regions_regionextension_fk"),
 		inverseJoinColumns = @JoinColumn(name = "region_id", referencedColumnName = "id"), inverseForeignKey = @ForeignKey(name = "regionextension_regions_region_fk"))
 	private List<Region> regions;
 
 	@ElementCollection(fetch = FetchType.EAGER)
-	@CollectionTable(name = "regionextension_supports",
+	@CollectionTable(name = "T_REGION_EXTENSION_SUPPORTS",
 		joinColumns = @JoinColumn(name = "regionextension_id", referencedColumnName = "id"), foreignKey = @ForeignKey(name = "regionextension_supports_regionextension_fk"))
 	@Column(name = "support")
 	@Enumerated(EnumType.STRING)
 	private List<CategoryTemperature> supportsCategoryTemperature;
 
 	@OneToMany
-	@JoinTable(name = "regionextension_actual_products",
+	@JoinTable(name = "T_REGION_EXTENSION_ACTUAL_PRODUCTS",
 		joinColumns = @JoinColumn(name = "regionextension_id"), foreignKey = @ForeignKey(name = "regionextension_actual_products_regionextension_fk"),
 		inverseJoinColumns = @JoinColumn(name = "product_id", referencedColumnName = "id"), inverseForeignKey = @ForeignKey(name = "regionextension_actual_products_product_fk"))
 	private List<Product> actualProducts = new ArrayList<>();
