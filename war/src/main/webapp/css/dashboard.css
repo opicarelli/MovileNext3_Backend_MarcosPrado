@@ -1,0 +1,46 @@
+.map-fullscreen:-moz-full-screen {
+    height: 100%;
+}
+
+.map-fullscreen:-webkit-full-screen {
+    height: 100%;
+}
+
+.map-fullscreen:-ms-fullscreen {
+    height: 100%;
+}
+
+.map-fullscreen:fullscreen {
+    height: 100%;
+}
+
+.map-fullscreen {
+    width: 100%;
+    height: 500px;
+}
+
+.map {
+    width: 100%;
+    height: calc(100% - 45px);
+}
+
+.map-interaction {
+    height: 45px;
+}
+
+.map-overlay {
+  max-width: 100px;
+  background-color: black;
+  color: white;
+  opacity: 0.9;
+  font-size: 8pt;
+  font-family: sans-serif;
+  margin: 3px;
+  border: 2px solid white;
+  border-radius: 10px 10px 10px 0;
+  padding: 2px 0 2px 5px;
+}
+
+.map-interaction .btn-group {
+    margin-right: 10px;
+}

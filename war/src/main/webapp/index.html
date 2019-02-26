@@ -1,15 +1,42 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>Movile Next 3a Edition</title>
+	<link href="css/bootstrap.min.css" type="text/css" rel="stylesheet" />
+	<link href="css/font-awesome.min.css" type="text/css" rel="stylesheet" />
+	<link href="css/ol.css" type="text/css" rel="stylesheet" />
+	<link href="css/dashboard.css" type="text/css" rel="stylesheet" />
+	<title>Dashboard</title>
 </head>
-
 <body>
-	<h1>Movile Next 3a Edition</h1>
-	<h2>by Marcos Oto Picarelli Prado</h2>
-	<h3>API</h3>
-	<p>Use<code>/portal/rest/?</code></p>
+	<div class="container">
+	    <h1>Movile Next 3a Edition</h1>
+	    <h4>by Marcos Oto Picarelli Prado</h4>
+	    <h6>API Extension Point</h6>
+		<div class="row">
+			<p>Use<code>/portal/rest/?</code></p> 
+		</div>
+		<div class="row">
+			<div class="col-md-12 px-0">
+				<div id="map-fullscreen" class="map-fullscreen">
+					<div id="map-interaction" class="map-interaction"></div>
+					<div id="map" class="map"></div>
+					<div id="popup"></div>
+				</div>
+			</div>
+		</div>
+	</div>
 </body>
+
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js/popper.min.js"></script>
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
+<script type="text/javascript" src="js/ol.js"></script>
+<script type="text/javascript" src="js/wrapper.ol.map.js"></script>
+<script type="text/javascript" src="js/dashboard.js"></script>
+<script type="text/javascript">
+	$(document).ready(function () {
+		DashboardCtrl.init();
+	});
+</script>
 
 </html>
