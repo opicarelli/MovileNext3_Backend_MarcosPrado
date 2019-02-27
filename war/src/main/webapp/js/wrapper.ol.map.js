@@ -42,7 +42,7 @@ wrapper.ol.Map = function (target, targetOverlay) {
 				new ol.control.FullScreen({source: "map-fullscreen"})
 			]),
 			view: new ol.View({
-				center: ol.proj.transform([-47.0473097, -22.816227],
+				center: ol.proj.transform([-47.09388256072998, -22.826385302709156],
 					wrapper.ol.ProjectionType.LAT_LON,
 					wrapper.ol.ProjectionType.OL3_DEFAULT),
 				zoom: 14
