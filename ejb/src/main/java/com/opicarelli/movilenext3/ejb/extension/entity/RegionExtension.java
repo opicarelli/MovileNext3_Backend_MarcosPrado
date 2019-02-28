@@ -63,6 +63,10 @@ public class RegionExtension implements Serializable {
 		inverseJoinColumns = @JoinColumn(name = "product_id", referencedColumnName = "id"), inverseForeignKey = @ForeignKey(name = "regionextension_actual_products_product_fk"))
 	private List<Product> actualProducts = new ArrayList<>();
 
+	@SuppressWarnings("unused")
+	private RegionExtension() {
+	}
+
 	public RegionExtension(Locality locality, List<Region> regions, List<CategoryTemperature> supports) {
 		this.locality = locality;
 		this.regions = regions;

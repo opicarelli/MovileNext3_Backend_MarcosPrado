@@ -32,8 +32,24 @@
 		feature.setId(id);
 
 		var wkt = that.wrapperMap.writeFeatureToWKT(feature, { featureProjection: wrapper.ol.ProjectionType.OL3_DEFAULT, dataProjection: wrapper.ol.ProjectionType.LAT_LON });
-		var polygon = { wktValue: wkt };
-		console.log(polygon);
+
+		$.get("/portal/rest/marketplace/establishments", { pointWkt: wkt })
+			.done(function(data) {
+				var establishmentsSource = new ol.source.Vector({});
+		        var establishmentsLayer = new ol.layer.Vector({ source: establishmentsSource });
+		        this.wrapperMap.olMap.addLayer(establishmentsLayer);
+
+		        var wktFormat = new ol.format.WKT();
+		        var optProjection = { featureProjection: wrapper.ol.ProjectionType.OL3_DEFAULT, dataProjection: wrapper.ol.ProjectionType.LAT_LON };
+
+		        $.each(data, function (idx, obj) {
+		        	var locality = obj.locality;
+        			var wkt = locality.toWkt;
+        			var feature = wktFormat.readFeature(wkt, optProjection);
+        			feature.setId("polyEstablishment_" + obj.id);
+        			establishmentsSource.addFeature(feature);
+        		});
+			});
 	};
 
 	this.loadMap = function () {
@@ -55,9 +71,9 @@
         			regionsSource.addFeature(feature);
         		});
         	}
+        	that.wrapperMap.olMap.updateSize();
         });
 
-		this.wrapperMap.olMap.updateSize();
 	};
 
 }

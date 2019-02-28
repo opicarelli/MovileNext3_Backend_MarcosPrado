@@ -11,6 +11,9 @@ import javax.persistence.Table;
 
 import org.apache.commons.lang3.Validate;
 
+import com.opicarelli.movilenext3.ejb.geo.GeoUtils;
+import com.opicarelli.movilenext3.ejb.geo.SRIDProjectionEnum;
+
 @Entity
 @Table(name = "T_LOCALITY")
 public class Locality implements Serializable {
@@ -26,6 +29,10 @@ public class Locality implements Serializable {
 
 	@Column(nullable = false)
 	private Double coordinateY;
+
+	@SuppressWarnings("unused")
+	private Locality() {
+	}
 
 	public Locality(Double coordinateX, Double coordinateY) {
 		validateInvariants(coordinateX, coordinateY);
@@ -53,6 +60,10 @@ public class Locality implements Serializable {
 
 	public Double getCoordinateY() {
 		return coordinateY;
+	}
+
+	public String getToWkt() {
+		return GeoUtils.toWkt(coordinateX, coordinateY, SRIDProjectionEnum.LAT_LON);
 	}
 
 	@Override

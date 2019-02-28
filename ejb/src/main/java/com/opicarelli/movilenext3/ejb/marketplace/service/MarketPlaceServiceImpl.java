@@ -63,7 +63,7 @@ public class MarketPlaceServiceImpl implements MarketPlaceService {
 	@Override
 	public List<RegionExtension> findAllRegionExtension(Region region) {
 		TypedQuery<RegionExtension> query = em.createQuery(
-				"from RegionExtension ext JOIN FETCH r.regions r where r.id = :idRegion", RegionExtension.class);
+				"from RegionExtension ext JOIN FETCH ext.regions r where r.id = :idRegion", RegionExtension.class);
 		query.setParameter("idRegion", region.getId());
 		return query.getResultList();
 	}

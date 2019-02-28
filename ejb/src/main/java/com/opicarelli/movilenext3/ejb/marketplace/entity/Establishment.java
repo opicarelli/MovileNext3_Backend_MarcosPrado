@@ -49,6 +49,10 @@ public class Establishment implements Serializable {
 	@OneToMany(mappedBy = "establishment", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<Product> products = new ArrayList<>();
 
+	@SuppressWarnings("unused")
+	private Establishment() {
+	}
+
 	public Establishment(String documentNumber, Locality locality, Region region) {
 		validateInvariants(documentNumber, locality, region);
 
