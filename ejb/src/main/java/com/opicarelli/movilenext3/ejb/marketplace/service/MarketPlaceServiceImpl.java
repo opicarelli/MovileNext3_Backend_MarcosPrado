@@ -38,6 +38,11 @@ public class MarketPlaceServiceImpl implements MarketPlaceService {
 	}
 
 	@Override
+	public List<Region> findAllRegion() {
+		return em.createQuery("from Region", Region.class).getResultList();
+	}
+
+	@Override
 	public List<Establishment> findAllEstablishment(Double coordinateX, Double coordinateY) {
 		List<Establishment> result = new ArrayList<>();
 		Region region = geoService.findRegion(coordinateX, coordinateY);

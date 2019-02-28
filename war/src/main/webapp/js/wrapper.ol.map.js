@@ -258,13 +258,13 @@ wrapper.ol.Drawer = function (target, interactions) {
 		divMapInteraction.append(divGroup);
 
 		// Create none interaction
-		var btnNone = $("<button type='button' class='btn btn-secondary active' id='noneInteraction'>Nenhum</button>");
-		btnNone.prepend("<i class='fa fa-circle' aria-hidden='true'></i>");
+		var btnNone = $("<button type='button' class='btn btn-light active' id='noneInteraction'>Nenhum</button>");
+		btnNone.prepend("<i class='fa fa-circle' aria-hidden='true' style='margin:2px;'></i>");
 		btnNone.bind("click", this.noneInteractions);
 		divGroup.append(btnNone);
 
-		var btnErase = $("<button type='button' class='btn btn-secondary' id='eraseInteraction'>Apagar</button>");
-		btnErase.prepend("<i class='fa fa-eraser' aria-hidden='true'></i>");
+		var btnErase = $("<button type='button' class='btn btn-light' id='eraseInteraction'>Apagar</button>");
+		btnErase.prepend("<i class='fa fa-eraser' aria-hidden='true' style='margin:2px;'></i>");
 		btnErase.bind("click", this.eraseFeature);
 		divGroup.append(btnErase);
 
@@ -274,9 +274,9 @@ wrapper.ol.Drawer = function (target, interactions) {
 				var item = this.interactions[i];
 				this.addInteraction(item);
 
-				var btn = $("<button type='button' class='btn btn-secondary' id='" + item.key + "'></button>");
+				var btn = $("<button type='button' class='btn btn-light' id='" + item.key + "'></button>");
 				btn.text(item.label);
-				btn.prepend("<i class='fa fa-square' aria-hidden='true' style='color:" + item.color + "'></i>");
+				btn.prepend("<i class='fa fa-square' aria-hidden='true' style='color:" + item.color + "; margin:2px;'></i>");
 				btn.bind("click", { interaction: item }, this.activate);
 				divGroup.append(btn);
 			}

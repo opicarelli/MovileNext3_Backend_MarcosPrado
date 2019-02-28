@@ -26,6 +26,10 @@ public class Region implements Serializable {
 	@Column(nullable = false, columnDefinition = "CLOB")
 	private String polygon;
 
+	@SuppressWarnings("unused")
+	private Region() {
+	}
+
 	public Region(String polygon) {
 		validateInvariants(polygon);
 

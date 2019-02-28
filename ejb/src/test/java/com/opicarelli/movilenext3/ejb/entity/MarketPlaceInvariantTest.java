@@ -11,7 +11,7 @@ import com.opicarelli.movilenext3.ejb.extension.entity.RegionExtension;
 import com.opicarelli.movilenext3.ejb.marketplace.entity.Establishment;
 import com.opicarelli.movilenext3.ejb.marketplace.entity.Region;
 
-public class MarketplaceInvariantTest extends JPAUnitTest {
+public class MarketPlaceInvariantTest extends JPAUnitTest {
 
 	@Test
 	public void testCreateRegionSuccess() {

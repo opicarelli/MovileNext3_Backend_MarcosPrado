@@ -9,6 +9,8 @@ import com.opicarelli.movilenext3.ejb.marketplace.entity.Region;
 
 public interface MarketPlaceService {
 
+	List<Region> findAllRegion();
+
 	boolean isFlagRegionExtensionEnabled();
 
 	List<Establishment> findAllEstablishment(Double coordinateX, Double coordinateY);
