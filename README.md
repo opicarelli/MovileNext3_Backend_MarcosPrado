@@ -3,10 +3,11 @@ by Marcos Oto Picarelli Prado
 
 ## Introduction
 
-Create connection points for deliveries, opening possibilities for deliveries in regions that the customer does not have access to the establishment by standard rule (distance) of the application (eg: App iFood - Client Region A, Establishment Region B; Create a point A-B that enable the extension of ClientA-EstablishmentB);
+Create connection points for deliveries, opening possibilities for deliveries in regions that the customer does not have access to the establishment by standard rule (distance) of the application (eg: App iFood - Client Region A, Establishment Region B; Create a point (container) A-B that enable the extension of ClientA-EstablishmentB);
 
 The idea may expand:
  - Product type allowed in container
+ - Product temperature allowed in container
  - Product size allowed in container
  - Number of regions extension
  - Etc
@@ -20,6 +21,20 @@ The idea may expand:
 ## Requirements
  - JDK 8 >=
  - Maven 3.3.1 >=
+
+## Technologies
+ - Java EE
+    - EJB
+    - JPA + Hibernate
+    - JAXRS
+ - JTS (Java Topology Suite)
+ - Apache Commons
+ - ModelMapper
+ - Mockito
+ - H2
+ - Bootstrap
+ - jQuery
+ - OpenLayers
 
 ## Build
 
