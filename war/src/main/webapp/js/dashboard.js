@@ -3,6 +3,8 @@
 	that = this;
 
 	this.wrapperMap = null;
+	this.establishmentsSource = null;
+	this.establishmentsLayer = null;
 
 	this.init = function () {
 		this.createMap();
@@ -12,7 +14,7 @@
 		this.wrapperMap = new wrapper.ol.Map();
 		this.wrapperMap.create();
 
-		// Interacao Novo Ponto
+		// Interaction New Client
 		var interactionNewClient = new wrapper.ol.Interaction(this.wrapperMap.olMap, "newClient", wrapper.ol.GeometryType.POINT, "Novo Cliente",
 			{
 				color: "#C2185B",
@@ -21,6 +23,11 @@
 
 		var interactions = [interactionNewClient];
 		this.wrapperMap.createInteraction("map-interaction", interactions);
+
+		// Establishments Layer
+		this.establishmentsSource = new ol.source.Vector({});
+        this.establishmentsLayer = new ol.layer.Vector({ source: this.establishmentsSource });
+        this.wrapperMap.olMap.addLayer(this.establishmentsLayer);
 
 		this.loadMap();
 	};
@@ -31,23 +38,22 @@
 		var id = Date.now();
 		feature.setId(id);
 
+		that.wrapperMap.removeAllDrawerFeatures();
+		that.establishmentsSource.clear();
+
 		var wkt = that.wrapperMap.writeFeatureToWKT(feature, { featureProjection: wrapper.ol.ProjectionType.OL3_DEFAULT, dataProjection: wrapper.ol.ProjectionType.LAT_LON });
 
 		$.get("/portal/rest/marketplace/establishments", { pointWkt: wkt })
 			.done(function(data) {
-				var establishmentsSource = new ol.source.Vector({});
-		        var establishmentsLayer = new ol.layer.Vector({ source: establishmentsSource });
-		        this.wrapperMap.olMap.addLayer(establishmentsLayer);
-
 		        var wktFormat = new ol.format.WKT();
 		        var optProjection = { featureProjection: wrapper.ol.ProjectionType.OL3_DEFAULT, dataProjection: wrapper.ol.ProjectionType.LAT_LON };
 
 		        $.each(data, function (idx, obj) {
-		        	var locality = obj.locality;
-        			var wkt = locality.toWkt;
+        			var wkt = obj.toWkt;
         			var feature = wktFormat.readFeature(wkt, optProjection);
         			feature.setId("polyEstablishment_" + obj.id);
-        			establishmentsSource.addFeature(feature);
+        			feature.setStyle(wrapper.ol.Style.getTriangle());
+        			that.establishmentsSource.addFeature(feature);
         		});
 			});
 	};

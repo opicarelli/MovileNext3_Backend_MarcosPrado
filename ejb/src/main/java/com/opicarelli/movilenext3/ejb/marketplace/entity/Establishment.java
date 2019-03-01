@@ -88,6 +88,10 @@ public class Establishment implements Serializable {
 		return id;
 	}
 
+	public Locality getLocality() {
+		return locality;
+	}
+
 	public Region getRegion() {
 		return region;
 	}

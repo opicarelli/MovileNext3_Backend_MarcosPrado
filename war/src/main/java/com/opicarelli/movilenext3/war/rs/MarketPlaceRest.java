@@ -1,5 +1,6 @@
 package com.opicarelli.movilenext3.war.rs;
 
+import java.lang.reflect.Type;
 import java.util.List;
 
 import javax.ejb.EJB;
@@ -12,12 +13,15 @@ import javax.ws.rs.core.MediaType;
 
 import org.locationtech.jts.geom.Coordinate;
 import org.locationtech.jts.geom.Point;
+import org.modelmapper.ModelMapper;
+import org.modelmapper.TypeToken;
 
 import com.opicarelli.movilenext3.ejb.geo.GeoUtils;
 import com.opicarelli.movilenext3.ejb.geo.SRIDProjectionEnum;
 import com.opicarelli.movilenext3.ejb.marketplace.entity.Establishment;
 import com.opicarelli.movilenext3.ejb.marketplace.entity.Region;
 import com.opicarelli.movilenext3.ejb.marketplace.service.MarketPlaceService;
+import com.opicarelli.movilenext3.war.marketplace.dto.EstablishmentDto;
 
 @Stateless
 @Path("/marketplace")
@@ -37,12 +41,17 @@ public class MarketPlaceRest {
 	@GET
 	@Path("/establishments")
 	@Produces(value = MediaType.APPLICATION_JSON)
-	public List<Establishment> getEstablishments(@QueryParam("pointWkt") String pointWkt) {
+	public List<EstablishmentDto> getEstablishments(@QueryParam("pointWkt") String pointWkt) {
 		Point point = GeoUtils.fromWkt(pointWkt, SRIDProjectionEnum.LAT_LON, Point.class);
 		Coordinate coordinate = point.getCoordinate();
 		List<Establishment> establishments = marketPlaceService.findAllEstablishment(coordinate.getX(),
 				coordinate.getY());
-		return establishments;
+
+		ModelMapper modelMapper = new ModelMapper();
+		Type listType = new TypeToken<List<EstablishmentDto>>() {
+		}.getType();
+		List<EstablishmentDto> dtos = modelMapper.map(establishments, listType);
+		return dtos;
 	}
 
 }

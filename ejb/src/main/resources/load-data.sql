@@ -17,3 +17,12 @@ insert into T_REGION_EXTENSION_REGIONS (regionextension_id, region_id) values (1
 insert into T_REGION_EXTENSION_REGIONS (regionextension_id, region_id) values (1, 2);
 insert into T_REGION_EXTENSION_SUPPORTS (regionextension_id, support) values (1, 'FROZEN');
 insert into T_REGION_EXTENSION_SUPPORTS (regionextension_id, support) values (1, 'COOLED');
+-- Establishment 2: Region 2
+insert into T_LOCALITY (id, coordinateX, coordinateY) values (3, -47.09021866321566, -22.8199674481165);
+insert into T_ESTABLISHMENT (id, documentNumber, locality_id, region_id) values (2, '66.965.616/0001-05', 3, 2);
+-- Establishment 3: Region 2
+insert into T_LOCALITY (id, coordinateX, coordinateY) values (4, -47.08208620548259, -22.825297552037668);
+insert into T_ESTABLISHMENT (id, documentNumber, locality_id, region_id) values (3, '69.261.831/0001-13', 4, 2);
+-- Establishment 4: Region 1
+insert into T_LOCALITY (id, coordinateX, coordinateY) values (5, -47.099488377571184, -22.8296583909365);
+insert into T_ESTABLISHMENT (id, documentNumber, locality_id, region_id) values (4, '62.628.627/0001-49', 5, 1);
