@@ -11,10 +11,10 @@ The idea may expand:
  - Number of regions extension
  - Etc
 
-### Standard rule (Nowadays)
+### Standard rule ( Nowadays )
 [Image how a client see establishments today](docs/how-a-client-see-establishments-today.png)
 
-### Extension rule (Nowadays)
+### Extension rule ( NOW WE CAN :) )
 [Image how a client WILL see establishments](docs/how-a-client-WILL-see-establishments.png)
 
 ## Requirements
