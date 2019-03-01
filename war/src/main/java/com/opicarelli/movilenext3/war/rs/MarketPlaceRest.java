@@ -5,7 +5,10 @@ import java.util.List;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
+import javax.ws.rs.Consumes;
+import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
@@ -52,6 +55,13 @@ public class MarketPlaceRest {
 		}.getType();
 		List<EstablishmentDto> dtos = modelMapper.map(establishments, listType);
 		return dtos;
+	}
+
+	@POST
+	@Path("/flagregionextension")
+	@Consumes(value = MediaType.APPLICATION_FORM_URLENCODED)
+	public void flagRegionExtension(@FormParam("enable") Boolean enable) {
+		marketPlaceService.flagRegionExtension(enable);
 	}
 
 }

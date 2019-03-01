@@ -11,8 +11,6 @@ public interface MarketPlaceService {
 
 	List<Region> findAllRegion();
 
-	boolean isFlagRegionExtensionEnabled();
-
 	List<Establishment> findAllEstablishment(Double coordinateX, Double coordinateY);
 
 	List<Establishment> findAllEstablishment(List<Region> regions);
@@ -20,5 +18,9 @@ public interface MarketPlaceService {
 	List<RegionExtension> findAllRegionExtension(Region region);
 
 	List<Product> findAllProduct(Double coordinateX, Double coordinateY);
+
+	boolean isFlagRegionExtensionEnabled();
+
+	void flagRegionExtension(boolean enable);
 
 }

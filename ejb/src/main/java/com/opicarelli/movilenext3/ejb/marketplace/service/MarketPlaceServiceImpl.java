@@ -12,9 +12,11 @@ import java.util.stream.Collectors;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
+import javax.persistence.NonUniqueResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
+import com.opicarelli.movilenext3.ejb.entity.GenericParameter;
 import com.opicarelli.movilenext3.ejb.extension.RegionExtensionRestriction.StandardRegionExtensionRestriction;
 import com.opicarelli.movilenext3.ejb.extension.entity.RegionExtension;
 import com.opicarelli.movilenext3.ejb.geo.service.GeoService;
@@ -30,12 +32,6 @@ public class MarketPlaceServiceImpl implements MarketPlaceService {
 
 	@EJB
 	private GeoService geoService;
-
-	@Override
-	public boolean isFlagRegionExtensionEnabled() {
-		// TODO Create system param
-		return true;
-	}
 
 	@Override
 	public List<Region> findAllRegion() {
@@ -123,7 +119,8 @@ public class MarketPlaceServiceImpl implements MarketPlaceService {
 					if (extension.isPresent()) {
 						StandardRegionExtensionRestriction restriction = StandardRegionExtensionRestriction.PRODUCT_TEMPERATURE;
 						for (Product product : establishment.getProducts()) {
-							boolean isFeasible = restriction.isFeasible(extension.get(), product); // TODO List of restrictions
+							boolean isFeasible = restriction.isFeasible(extension.get(), product); // TODO List of
+																									// restrictions
 							if (isFeasible) {
 								result.add(product);
 							}
@@ -137,4 +134,33 @@ public class MarketPlaceServiceImpl implements MarketPlaceService {
 		return result;
 	}
 
+	@Override
+	public boolean isFlagRegionExtensionEnabled() {
+		try {
+			GenericParameter genericParameter = getGenericParameterFlagRegionExtension("FLAG_REGION_EXTENSION_ENABLED");
+			if (genericParameter == null) {
+				return false;
+			}
+			// XXX As long as possible migrate to a generic construct by class type
+			return Boolean.valueOf(genericParameter.getValueParameter());
+		} catch (NonUniqueResultException e) {
+			return false;
+		}
+	}
+
+	@Override
+	public void flagRegionExtension(boolean enable) {
+		GenericParameter genericParameter = getGenericParameterFlagRegionExtension("FLAG_REGION_EXTENSION_ENABLED");
+		if (genericParameter != null) {
+			genericParameter.setValueParameter(String.valueOf(enable));
+		}
+	}
+
+	private GenericParameter getGenericParameterFlagRegionExtension(String keyParameter) {
+		String jpql = "from GenericParameter where keyParameter = :keyParameter";
+		TypedQuery<GenericParameter> query = em.createQuery(jpql, GenericParameter.class);
+		query.setParameter("keyParameter", keyParameter);
+		GenericParameter genericParameter = query.getSingleResult();
+		return genericParameter;
+	}
 }

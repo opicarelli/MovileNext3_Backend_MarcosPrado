@@ -7,7 +7,22 @@
 	this.establishmentsLayer = null;
 
 	this.init = function () {
+		this.takeControls();
 		this.createMap();
+	};
+
+	this.takeControls = function() {
+		$("#enableRegionExtension").click(function() {
+			var data = JSON.stringify();
+			$.ajax({
+				type: "POST",
+				url: "/portal/rest/marketplace/flagregionextension",
+				data: { enable: this.checked }
+			}).fail(function(jqXHR, textStatus, errorThrown) {
+				console.error("The flag cannot be changed");
+				console.error(jqXHR, textStatus, errorThrown);
+			});
+		});
 	};
 
 	this.createMap = function () {
