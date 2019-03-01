@@ -18,6 +18,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
+import com.opicarelli.movilenext3.ejb.entity.GenericParameter;
 import com.opicarelli.movilenext3.ejb.entity.Locality;
 import com.opicarelli.movilenext3.ejb.extension.entity.CategoryTemperature;
 import com.opicarelli.movilenext3.ejb.extension.entity.RegionExtension;
@@ -55,6 +56,9 @@ public class MarketPlaceServiceTest {
 		// Mock geoService.findRegion
 		mockGeoServiceFindRegion();
 
+		// Mock isFlagRegionExtensionEnabled
+		mockIsFlagRegionExtensionEnabled();
+
 		// Mock findAllEstablishment
 		// Establishment INSIDE REGION 2
 		Establishment establishmentRegion2 = mockFindAllEstablishment(region2);
@@ -72,6 +76,14 @@ public class MarketPlaceServiceTest {
 	private void mockGeoServiceFindRegion() {
 		Region mockGeoServiceFindRegion = mock(Region.class);
 		when(geoService.findRegion(any(Double.class), any(Double.class))).thenReturn(mockGeoServiceFindRegion);
+	}
+
+	private void mockIsFlagRegionExtensionEnabled() {
+		GenericParameter generic = new GenericParameter();
+		generic.setValueParameter("true");
+		TypedQuery<GenericParameter> mockQueryGetGenericParameterFlagRegionExtension = mock(TypedQuery.class);
+		when(em.createQuery(any(String.class), eq(GenericParameter.class))).thenReturn(mockQueryGetGenericParameterFlagRegionExtension);
+		when(mockQueryGetGenericParameterFlagRegionExtension.getSingleResult()).thenReturn(generic);
 	}
 
 	@SuppressWarnings("unchecked")

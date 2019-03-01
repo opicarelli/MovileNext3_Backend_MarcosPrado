@@ -9,6 +9,7 @@
 
 		<class>com.opicarelli.movilenext3.ejb.entity.Order</class>
 		<class>com.opicarelli.movilenext3.ejb.entity.OrderItem</class>
+		<class>com.opicarelli.movilenext3.ejb.entity.GenericParameter</class>
 		<class>com.opicarelli.movilenext3.ejb.entity.Leg</class>
 		<class>com.opicarelli.movilenext3.ejb.entity.Locality</class>
 		<class>com.opicarelli.movilenext3.ejb.entity.Route</class>

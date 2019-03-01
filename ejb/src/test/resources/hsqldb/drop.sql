@@ -17,6 +17,7 @@ alter table T_REGION_EXTENSION_SUPPORTS drop constraint regionextension_supports
 alter table T_ROUTE drop constraint route_worker_fk
 drop table T_CLIENTBUYER if exists
 drop table T_ESTABLISHMENT if exists
+drop table T_GENERIC_PARAMETER if exists
 drop table T_LEG if exists
 drop table T_LOCALITY if exists
 drop table T_ORDER if exists
