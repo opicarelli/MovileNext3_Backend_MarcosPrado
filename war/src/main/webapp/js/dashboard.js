@@ -5,6 +5,9 @@
 	this.wrapperMap = null;
 	this.establishmentsSource = null;
 	this.establishmentsLayer = null;
+	this.regionExtensionSource = null;
+	this.regionExtensionLayer = null;
+
 
 	this.init = function () {
 		this.takeControls();
@@ -13,15 +16,7 @@
 
 	this.takeControls = function() {
 		$("#enableRegionExtension").click(function() {
-			var data = JSON.stringify();
-			$.ajax({
-				type: "POST",
-				url: "/portal/rest/marketplace/flagregionextension",
-				data: { enable: this.checked }
-			}).fail(function(jqXHR, textStatus, errorThrown) {
-				console.error("The flag cannot be changed");
-				console.error(jqXHR, textStatus, errorThrown);
-			});
+			that.flagRegionExtension(this.checked);
 		});
 	};
 
@@ -43,6 +38,11 @@
 		this.establishmentsSource = new ol.source.Vector({});
         this.establishmentsLayer = new ol.layer.Vector({ source: this.establishmentsSource });
         this.wrapperMap.olMap.addLayer(this.establishmentsLayer);
+
+        // RegionExtensions
+        this.regionExtensionSource = new ol.source.Vector({});
+        this.regionExtensionLayer = new ol.layer.Vector({ source: this.regionExtensionSource });
+        this.wrapperMap.olMap.addLayer(this.regionExtensionLayer);
 
 		this.loadMap();
 	};
@@ -97,4 +97,25 @@
 
 	};
 
+	this.flagRegionExtension = function(enable) {
+		$.ajax({
+			type: "POST",
+			url: "/portal/rest/marketplace/flagregionextension",
+			data: { enable: enable }
+		}).done(function(data) {
+			that.regionExtensionSource.clear();
+			var wktFormat = new ol.format.WKT();
+	        var optProjection = { featureProjection: wrapper.ol.ProjectionType.OL3_DEFAULT, dataProjection: wrapper.ol.ProjectionType.LAT_LON };
+	        $.each(data, function (idx, obj) {
+    			var wkt = obj.toWkt;
+    			var feature = wktFormat.readFeature(wkt, optProjection);
+    			feature.setId("regionExtension_" + obj.id);
+    			feature.setStyle(wrapper.ol.Style.getX("#9C27B0", 10));
+    			that.regionExtensionSource.addFeature(feature);
+    		});
+		}).fail(function(jqXHR, textStatus, errorThrown) {
+			console.error("The flag cannot be changed");
+			console.error(jqXHR, textStatus, errorThrown);
+		});
+	};
 }

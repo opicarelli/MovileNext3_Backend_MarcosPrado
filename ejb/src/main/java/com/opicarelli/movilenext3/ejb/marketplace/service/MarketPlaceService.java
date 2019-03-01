@@ -21,6 +21,6 @@ public interface MarketPlaceService {
 
 	boolean isFlagRegionExtensionEnabled();
 
-	void flagRegionExtension(boolean enable);
+	List<RegionExtension> flagRegionExtension(boolean enable);
 
 }

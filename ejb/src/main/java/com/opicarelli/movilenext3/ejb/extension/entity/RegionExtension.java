@@ -77,6 +77,10 @@ public class RegionExtension implements Serializable {
 		return id;
 	}
 
+	public Locality getLocality() {
+		return locality;
+	}
+
 	public List<Region> getRegions() {
 		return regions;
 	}

@@ -149,11 +149,16 @@ public class MarketPlaceServiceImpl implements MarketPlaceService {
 	}
 
 	@Override
-	public void flagRegionExtension(boolean enable) {
+	public List<RegionExtension> flagRegionExtension(boolean enable) {
+		List<RegionExtension> extensions = new ArrayList<>();
 		GenericParameter genericParameter = getGenericParameterFlagRegionExtension("FLAG_REGION_EXTENSION_ENABLED");
 		if (genericParameter != null) {
 			genericParameter.setValueParameter(String.valueOf(enable));
+			if (enable) {
+				extensions = em.createQuery("from RegionExtension", RegionExtension.class).getResultList();
+			}
 		}
+		return extensions;
 	}
 
 	private GenericParameter getGenericParameterFlagRegionExtension(String keyParameter) {

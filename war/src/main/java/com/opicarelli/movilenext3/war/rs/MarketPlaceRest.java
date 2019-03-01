@@ -19,12 +19,14 @@ import org.locationtech.jts.geom.Point;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
 
+import com.opicarelli.movilenext3.ejb.extension.entity.RegionExtension;
 import com.opicarelli.movilenext3.ejb.geo.GeoUtils;
 import com.opicarelli.movilenext3.ejb.geo.SRIDProjectionEnum;
 import com.opicarelli.movilenext3.ejb.marketplace.entity.Establishment;
 import com.opicarelli.movilenext3.ejb.marketplace.entity.Region;
 import com.opicarelli.movilenext3.ejb.marketplace.service.MarketPlaceService;
 import com.opicarelli.movilenext3.war.marketplace.dto.EstablishmentDto;
+import com.opicarelli.movilenext3.war.marketplace.dto.RegionExtensionDto;
 
 @Stateless
 @Path("/marketplace")
@@ -60,8 +62,14 @@ public class MarketPlaceRest {
 	@POST
 	@Path("/flagregionextension")
 	@Consumes(value = MediaType.APPLICATION_FORM_URLENCODED)
-	public void flagRegionExtension(@FormParam("enable") Boolean enable) {
-		marketPlaceService.flagRegionExtension(enable);
+	@Produces(value = MediaType.APPLICATION_JSON)
+	public List<RegionExtensionDto> flagRegionExtension(@FormParam("enable") Boolean enable) {
+		List<RegionExtension> extensions = marketPlaceService.flagRegionExtension(enable);
+		ModelMapper modelMapper = new ModelMapper();
+		Type listType = new TypeToken<List<RegionExtensionDto>>() {
+		}.getType();
+		List<RegionExtensionDto> dtos = modelMapper.map(extensions, listType);
+		return dtos;
 	}
 
 }
