@@ -12,10 +12,10 @@ The idea may expand:
  - Etc
 
 ### Standard rule ( Nowadays )
-[Image how a client see establishments today](docs/how-a-client-see-establishments-today.png)
+![alt Image how a client see establishments today](docs/how-a-client-see-establishments-today.png)
 
 ### Extension rule ( NOW WE CAN :) )
-[Image how a client WILL see establishments](docs/how-a-client-WILL-see-establishments.png)
+![alt Image how a client WILL see establishments](docs/how-a-client-WILL-see-establishments.png)
 
 ## Requirements
  - JDK 8 >=
