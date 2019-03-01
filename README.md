@@ -25,7 +25,7 @@ The idea may expand:
 
 ```console
 cd ~
-git checkout https://github.com/opicarelli/MovileNext3_Backend_MarcosPrado.git
+git clone https://github.com/opicarelli/MovileNext3_Backend_MarcosPrado.git
 cd MovileNext3_Backend_MarcosPrado
 mvn clean install
 ```
@@ -38,6 +38,8 @@ This is a sample of Java EE 7 project designed to easily deploy in Jboss Wildfly
 ```console
 cd ~
 wget https://download.jboss.org/wildfly/11.0.0.Final/wildfly-11.0.0.Final.zip
+#OR IF YOU DO NOT HAVE WGET TRY CURL
+#curl https://download.jboss.org/wildfly/11.0.0.Final/wildfly-11.0.0.Final.zip --output wildfly-11.0.0.Final.zip
 unzip wildfly-11.0.0.Final.zip
 cd wildfly-11.0.0.Final
 ```
@@ -66,4 +68,26 @@ mvn wildfly:deploy
 ```console
 cd ~/MovileNext3_Backend_MarcosPrado
 mvn wildfly:undeploy 
+```
+
+## Simulate the API
+
+http://localhost:8080/portal
+
+## REST API
+
+Find all regions
+```console
+http://localhost:8080/portal/rest/regions
+```
+
+Enable or Disable the FEATURE Region Extension
+```console
+http://localhost:8080/portal/rest/flagregionextension
+Body {enable:true}
+```
+
+Find all establishments by a simulated client (coordinate X and Y)
+```console
+http://localhost:8080/portal/rest/establishments?pointWkt={pointWkt}
 ```
