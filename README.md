@@ -5,7 +5,21 @@ by Marcos Oto Picarelli Prado
 
 Create connection points for deliveries, opening possibilities for deliveries in regions that the customer does not have access to the establishment by standard rule (distance) of the application (eg: App iFood - Client Region A, Establishment Region B; Create a point A-B that enable the extension of ClientA-EstablishmentB);
 
-The idea expands N rules (constraints)...
+The idea may expand:
+ - Product type allowed in container
+ - Product size allowed in container
+ - Number of regions extension
+ - Etc
+
+### Standard rule (Nowadays)
+[Image how a client see establishments today](docs/how-a-client-see-establishments-today.png)
+
+### Extension rule (Nowadays)
+[Image how a client WILL see establishments](docs/how-a-client-WILL-see-establishments.png)
+
+## Requirements
+ - JDK 8 >=
+ - Maven 3.3.1 >=
 
 ## Build
 
